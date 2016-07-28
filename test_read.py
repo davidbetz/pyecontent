@@ -2,7 +2,7 @@ import unittest
 
 import sys, os
 
-import mcontent
+import econtent
 
 current_path = os.path.dirname(os.path.realpath(__file__))
 sample_path = os.path.join(current_path, 'sample')
@@ -35,7 +35,7 @@ class TestApp(unittest.TestCase):
         for file in os.listdir(folder):
             full = os.path.join(folder, file)
             try:
-                result = mcontent.parse_file(full)
+                result = econtent.read_file(full)
             except UnicodeDecodeError as err:
                 print('cannot read {}'.format(full))
                 print(err)
@@ -47,11 +47,11 @@ class TestApp(unittest.TestCase):
 
     def test_parse(self):
         with open(item01_path, 'r') as f:
-            result = mcontent.parse(f.read())
+            result = econtent.read(f.read())
             self.check(result)
 
     def test_parse_file(self):
-        result = mcontent.parse_file(item01_path)
+        result = econtent.read_file(item01_path)
 
         self.check(result)
 

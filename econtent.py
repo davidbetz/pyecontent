@@ -1,16 +1,11 @@
-from general.debug import kwlog, log, logline, logargs
-
 import sys, os
 import re
 import datetime
 
 def normalize_text(text):
-    if sys.version_info.major == 2:
-        if isinstance(text, unicode):
-            text = str(text).decode('utf-8')
     return text
 
-def parse(input):
+def read(input):
     obj = { }
     body = []
     index = 0
@@ -56,9 +51,9 @@ def parse(input):
 
     return obj
 
-def parse_file(path):
+def read_file(path):
     with open(path, 'r') as f:
-        obj = parse(f.read())
+        obj = read(f.read())
 
     file_data = os.stat(path)
 
