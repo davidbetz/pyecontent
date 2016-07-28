@@ -1,4 +1,4 @@
-# Extended Content Reader (ECR)
+# Extended Content Reader
 
 **Copyright (c) 2016 David Betz**
 
