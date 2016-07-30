@@ -1,6 +1,6 @@
 ## copyright (c) 2016 David Betz
 
-import sys, os
+import os
 import re
 import datetime
 
@@ -92,6 +92,7 @@ def read(input):
 
     return obj
 
+
 def read_file(path):
     with open(path, 'r') as f:
         obj = read(f.read())
@@ -108,7 +109,12 @@ def read_file(path):
     obj['_filename'] = os.path.basename(path)
 
     part_array = os.path.splitext(obj['_filename'])
-    obj['_extension'] = part_array[1] if part_array[1][0] != '.' else part_array[1][1:]
-    obj['_basename'] = part_array[0]
+
+    if len(part_array[1]) == 0:
+        obj['_extension'] = part_array[0][1:]
+        obj['_basename'] = ''
+    else:
+        obj['_extension'] = part_array[1] if part_array[1][0] != '.' else part_array[1][1:]
+        obj['_basename'] = part_array[0]
 
     return obj
