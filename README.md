@@ -2,6 +2,14 @@
 
 **Copyright (c) 2016 David Betz**
 
+## Installation
+
+    pip install econtent
+
+## Compatibility
+
+Python 2 and 3
+
 ## Purpose
 
 Files have content and metadata. Markdown has already helps us go from boring text files to rich text (without RTF or proprietary voodoo), but it's not enough. My content needs sections and it needs metadata. They already have a create date and a modified date, but I often need to overwrite these. That's where this component comes in. It's been helping me for a few years now (well, this is the Python refactor/port of my original/production/more complex .NET version).
@@ -71,8 +79,6 @@ That's really useful information without the needs to play around with parsing f
 The created, modified, filename, extension, and basename are read from the file metadata, but created and modified can be overwritten using @_created@ and @_modified@ tokens.
 
 But, it's not just metadata. On my technical website, I require color syntax for various programming languages. Preformatting makes the code unreadable. So, I need sections(@@begin...@@/@@end@@. On my research website, I require extensive citations and footnotes. So, I need linkable content (@@XXXX@@).
-
-Project is intented to be compatible with Python 2 and 3.
 
 See test_read.py for usage.
 
