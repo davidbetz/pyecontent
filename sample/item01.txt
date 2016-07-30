@@ -7,6 +7,8 @@ unfortified chopine hill witchcraft countries toward nerve grief duty rivals.
       var item = 'item01';
       return item.split('').reverse()
     })());
+@@format:python@@
+    print('item01'[::-1])
 @@end@@
 
 patience unhouseld pours lapsed would passion point blastments lady spectators.
@@ -15,3 +17,5 @@ patience unhouseld pours lapsed would passion point blastments lady spectators.
 @title@ Thy Wonderful Randomious
 @page@ 728
 @footnote|78@ nose thee something disclaiming wrung antiquity rend illume halt osric list
+@_created@ 2016-07-27T19:38:10Z
+@_modified@ 2016-07-27T19:38:10Z
