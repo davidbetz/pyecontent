@@ -4,9 +4,6 @@ import sys, os
 import re
 import datetime
 
-def normalize_text(text):
-    return text
-
 def read(input):
     obj = { }
     body = []
@@ -35,12 +32,12 @@ def read(input):
                     if format_content is None:
                         content[index] = {
                             section_data['type']: section_data['code'],
-                            '_': normalize_text('\n'.join(body))
+                            '_': '\n'.join(body)
                         }
                     else:
                         format_content[format_index] = {
                             section_data['type']: section_data['code'],
-                            '_': normalize_text('\n'.join(body))
+                            '_': '\n'.join(body)
                         }
                         content[index] = format_content
 
@@ -58,7 +55,7 @@ def read(input):
                             format_index = 0
                         format_content[format_index] = {
                             section_data['type']: section_data['code'],
-                            '_': normalize_text('\n'.join(body))
+                            '_': '\n'.join(body)
                         }
                         section_data = { 'type': type, 'code': code }
                         format_index = format_index + 1
@@ -89,7 +86,7 @@ def read(input):
 
             body.append(line)
 
-    content[index] = normalize_text('\n'.join(body))
+    content[index] = '\n'.join(body)
 
     obj['_'] = content
 
