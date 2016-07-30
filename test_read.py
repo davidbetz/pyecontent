@@ -27,7 +27,7 @@ expected = {
     'title': 'Thy Wonderful Randomious',
     'page': '728',
     'footnote': {
-        78: 'nose thee something disclaiming wrung antiquity rend illume halt osric list',        
+        78: 'nose thee something disclaiming wrung antiquity rend illume halt osric list',
     },
     '_created': '2016-07-27T19:38:10Z',
     '_modified': '2016-07-27T19:38:10Z',
