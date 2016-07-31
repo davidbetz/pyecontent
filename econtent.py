@@ -86,9 +86,9 @@ def read(input):
 
             body.append(line)
 
-    content[index] = '\n'.join(body)
-
-    obj['_'] = content
+    if len(body) > 0:
+        content[index] = '\n'.join(body)
+        obj['_'] = content
 
     return obj
 

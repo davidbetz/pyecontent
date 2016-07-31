@@ -38,26 +38,9 @@ ITEM01_EXPECTED = {
 }
 
 MANIFEST_EXPECTED = {
-    '_': {
-        0: 'hollow unbraced needs mineral high fingerd strings red tragical having definement invisible@@footnote|78@@. flames grow pranks obey hearsed variable grandsire bodykins possessd worser oerthrown oerweigh healthful kingly wise faculty loggats best.\nunfortified chopine hill witchcraft countries toward nerve grief duty rivals.',
-        1: {
-            0: {
-                '_': "    alert((function() {\n      var item = 'item01';\n      return item.split('').reverse()\n    })());",
-                'format': 'javascript'
-            },
-            1: {
-                '_': "    print('item01'[::-1])",
-                'format': 'python'
-            }
-        },
-        2: 'patience unhouseld pours lapsed would passion point blastments lady spectators.',
-    },
     'author': 'Billy Speareshakes',
     'title': 'Thy Wonderful Randomious',
     'page': '728',
-    'footnote': {
-        78: 'nose thee something disclaiming wrung antiquity rend illume halt osric list',
-    },
     '_created': '2016-07-27T19:38:10Z',
     '_modified': '2016-07-27T19:38:10Z',
     '_filename': '.manifest',
@@ -99,7 +82,15 @@ class TestApp(unittest.TestCase):
     def test_parse_manifest(self):
         result = econtent.read_file(MANIFEST_PATH)
 
-        self.check(MANIFEST_EXPECTED, result)
+        with self.assertRaises(KeyError):
+            result['_']
+
+        self.assertEqual(MANIFEST_EXPECTED['author'], result['author'])
+        self.assertEqual(MANIFEST_EXPECTED['title'], result['title'])
+        self.assertEqual(MANIFEST_EXPECTED['page'], result['page'])
+        self.assertEqual(MANIFEST_EXPECTED['_created'], result['_created'])
+        self.assertEqual(MANIFEST_EXPECTED['_modified'], result['_modified'])
+
         self.check_file_data(MANIFEST_EXPECTED, result)
 
 
