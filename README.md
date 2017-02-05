@@ -1,6 +1,6 @@
 # Extended Content Reader
 
-**Copyright (c) 2016 David Betz**
+**Copyright (c) 2016-2017 David Betz**
 
 ## Installation
 
