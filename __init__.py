@@ -1,1 +1,1 @@
-from econtent import read, read_file
+from ./econtent import read, read_file
