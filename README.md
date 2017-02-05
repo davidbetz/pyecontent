@@ -10,6 +10,8 @@
 
 Python 2 and 3
 
+[![Build Status](https://travis-ci.org/davidbetz/econtent.svg?branch=master)](https://travis-ci.org/davidbetz/econtent)
+
 ## Purpose
 
 Files have content and metadata. Markdown has already helps us go from boring text files to rich text (without RTF or proprietary voodoo), but it's not enough. My content needs sections and it needs metadata. They already have a create date and a modified date, but I often need to overwrite these. That's where this component comes in. It's been helping me for a few years now (well, this is the Python refactor/port of my original/production/more complex .NET version).
