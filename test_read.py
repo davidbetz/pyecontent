@@ -2,7 +2,7 @@ import unittest
 
 import os
 
-import .econtent
+from . import econtent
 
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 SAMPLE_PATH = os.path.join(CURRENT_PATH, 'sample')
