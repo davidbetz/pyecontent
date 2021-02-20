@@ -36,7 +36,7 @@ MANIFEST_PATH = os.path.join(SAMPLE_PATH, '.manifest')
 
 ITEM01_EXPECTED = {
     '_': {
-        0: 'hollow unbraced needs mineral high fingerd strings red tragical having definement invisible@@footnote|78@@. flames grow pranks obey hearsed variable grandsire bodykins possessd worser oerthrown oerweigh healthful kingly wise faculty loggats best.\nunfortified chopine hill witchcraft countries toward nerve grief duty rivals.',
+        0: 'hollow unbraced needs mineral high fingerd strings red tragical having definement invisible@@footnote|78@@. flames grow pranks obey hearsed variable grandsire bodykins possessd worser oerthrown oerweigh healthful kingly wise faculty loggats best.\nunfortified chopine hill witchcraft@@note|holds@@ countries toward nerve grief duty rivals.',
         1: {
             0: {
                 '_': "    alert((function() {\n      var item = 'item01';\n      return item.split('').reverse()\n    })());",
@@ -47,13 +47,18 @@ ITEM01_EXPECTED = {
                 'format': 'python'
             }
         },
-        2: 'patience unhouseld pours lapsed would passion point blastments lady spectators.',
+        2: 'patience unhouseld pours lapsed would passion@@note|upshot@@ point blastments lady spectators.@@footnote|99@@',
     },
     'author': 'Billy Speareshakes',
     'title': 'Thy Wonderful Randomious',
     'page': '728',
     'footnote': {
-        78: 'nose thee something disclaiming wrung antiquity rend illume halt osric list',
+        "78": 'nose thee something disclaiming wrung antiquity rend illume halt osric list',
+        "99": 'unclefather concernings customary',
+    },
+    'note': {
+        "holds": 'forgery chanson',
+        "upshot": 'thoroughly served fame',
     },
     '_created': '2016-07-27T19:38:10Z',
     '_modified': '2016-07-27T19:38:10Z',
@@ -135,7 +140,10 @@ class TestApp(unittest.TestCase):
         self.assertEqual(expected['author'], result['author'])
         self.assertEqual(expected['title'], result['title'])
         self.assertEqual(expected['page'], result['page'])
-        self.assertEqual(expected['footnote'][78], expected['footnote'][78])
+        self.assertEqual(expected['footnote']["78"], result['footnote']["78"])
+        self.assertEqual(expected['footnote']["99"], result['footnote']["99"])
+        self.assertEqual(expected['note']["holds"], result['note']["holds"])
+        self.assertEqual(expected['note']["upshot"], result['note']["upshot"])
         self.assertEqual(expected['_created'], result['_created'])
         self.assertEqual(expected['_modified'], result['_modified'])
 

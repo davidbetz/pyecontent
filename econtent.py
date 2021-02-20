@@ -88,9 +88,9 @@ def read(input):
                 tag_content = sr.group(2).strip()
                 if '|' in tag_type:
                     (bar_left, bar_right) = tag_type.split('|', 1)
-                    obj[bar_left] = {
-                        bar_right: tag_content
-                    }
+                    if bar_left not in obj:
+                        obj[bar_left] = {}
+                    obj[bar_left][bar_right] = tag_content
                 else:
                     #+ don't save most stuff with prefix; it's my universal code for disabled (or system)
                     #+   it's VERY common to overwrite _created and _modified (since they are often killed
