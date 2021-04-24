@@ -1,6 +1,6 @@
 # MIT License
 
-# Copyright (c) 2016-2017 David Betz
+# Copyright (c) 2016-2021 David Betz
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +33,7 @@ def read(input):
     format_content = None
     for line in input.split('\n'):
         if len(line) == 0:
+            body.append(line)
             continue
         if line.startswith('@@'):
             if line.startswith('@@begin|'):
@@ -40,7 +41,7 @@ def read(input):
                 if sr != None:
                     type = sr.group(1)
                     code = sr.group(2)
-                    content[index] = '\n'.join(body)
+                    content[index] = '\n'.join(body).strip("\n")
                     index = index + 1
                     body = []
                     section_data = { 'type': type, 'code': code }
@@ -52,12 +53,12 @@ def read(input):
                     if format_content is None:
                         content[index] = {
                             section_data['type']: section_data['code'],
-                            '_': '\n'.join(body)
+                            '_': '\n'.join(body).strip("\n")
                         }
                     else:
                         format_content[format_index] = {
                             section_data['type']: section_data['code'],
-                            '_': '\n'.join(body)
+                            '_': '\n'.join(body).strip("\n")
                         }
                         content[index] = format_content
 
@@ -75,7 +76,7 @@ def read(input):
                             format_index = 0
                         format_content[format_index] = {
                             section_data['type']: section_data['code'],
-                            '_': '\n'.join(body)
+                            '_': '\n'.join(body).strip("\n")
                         }
                         section_data = { 'type': type, 'code': code }
                         format_index = format_index + 1
@@ -107,9 +108,9 @@ def read(input):
             body.append(line)
 
     if len(body) > 0:
-        content[index] = '\n'.join(body)
+        content[index] = '\n'.join(body).strip("\n")
         obj['_'] = content
-
+        
     return obj
 
 

@@ -32,11 +32,12 @@ except:
 CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 SAMPLE_PATH = os.path.join(CURRENT_PATH, 'sample')
 ITEM01_PATH = os.path.join(SAMPLE_PATH, 'item01.txt')
+ITEM02_PATH = os.path.join(SAMPLE_PATH, 'item02.md')
 MANIFEST_PATH = os.path.join(SAMPLE_PATH, '.manifest')
 
 ITEM01_EXPECTED = {
     '_': {
-        0: 'hollow unbraced needs mineral high fingerd strings red tragical having definement invisible@@footnote|78@@. flames grow pranks obey hearsed variable grandsire bodykins possessd worser oerthrown oerweigh healthful kingly wise faculty loggats best.\nunfortified chopine hill witchcraft@@note|holds@@ countries toward nerve grief duty rivals.',
+        0: 'hollow unbraced needs mineral high fingerd strings red tragical having definement invisible@@footnote|78@@. flames grow pranks obey hearsed variable grandsire bodykins possessd worser oerthrown oerweigh healthful kingly wise faculty loggats best.\n\nunfortified chopine hill witchcraft@@note|holds@@ countries toward nerve grief duty rivals.',
         1: {
             0: {
                 '_': "    alert((function() {\n      var item = 'item01';\n      return item.split('').reverse()\n    })());",
@@ -78,6 +79,18 @@ MANIFEST_EXPECTED = {
     '_basename': '',
 }
 
+ITEM02_EXPECTED={
+    'citation': 'Gary the Snail. Spongebob.',
+     '_': {
+         0: 'There once was a man from Peru\n\nwho dreamt of eating his shoe\n\nhe woke with a fright in the middle of the night\n\nto find his dream had come true'
+        },
+    "_created": "2021-04-24T17:04:57Z",
+    "_modified": "2021-04-24T17:04:57Z",
+    "_filename": "item02.md",
+    "_extension": "md",
+    "_basename": "item02"
+}
+
 class TestApp(unittest.TestCase):
     def disabled_test_walk(self):
         """
@@ -99,15 +112,18 @@ class TestApp(unittest.TestCase):
     def test_parse(self):
         with open(ITEM01_PATH, 'r') as f:
             result = econtent.read(f.read())
-            self.check(ITEM01_EXPECTED, result)
-
+            self.check01(ITEM01_EXPECTED, result)
 
     def test_parse_file(self):
         result = econtent.read_file(ITEM01_PATH)
 
-        self.check(ITEM01_EXPECTED, result)
+        self.check01(ITEM01_EXPECTED, result)
         self.check_file_data(ITEM01_EXPECTED, result)
 
+    def test_parse_file2(self):
+        result = econtent.read_file(ITEM02_PATH)
+
+        self.assertEqual(ITEM02_EXPECTED['_'][0], result['_'][0])
 
     def test_parse_manifest(self):
         result = econtent.read_file(MANIFEST_PATH)
@@ -123,14 +139,13 @@ class TestApp(unittest.TestCase):
 
         self.check_file_data(MANIFEST_EXPECTED, result)
 
-
     def check_file_data(self, expected, result):
         self.assertEqual(expected['_filename'], result['_filename'])
         self.assertEqual(expected['_extension'], result['_extension'])
         self.assertEqual(expected['_basename'], result['_basename'])
 
 
-    def check(self, expected, result):
+    def check01(self, expected, result):
         self.assertEqual(expected['_'][0], result['_'][0])
         self.assertEqual(expected['_'][1][0]['_'], result['_'][1][0]['_'])
         self.assertEqual(expected['_'][1][0]['format'], result['_'][1][0]['format'])
