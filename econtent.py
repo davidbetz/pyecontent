@@ -35,8 +35,10 @@ def read(input):
         if len(line) == 0:
             body.append(line)
             continue
+        line_handled = False
         if line.startswith('@@'):
             if line.startswith('@@begin|'):
+                line_handled = True
                 sr = re.search("@@begin\|(?P<type>[0-9a-zA-Z_]+)\:(?P<code>[0-9a-zA-Z_]+)@@", line)
                 if sr != None:
                     type = sr.group(1)
@@ -49,6 +51,7 @@ def read(input):
                     format_index = 0
                     format_content = {}
             elif section_data is not None and line.startswith('@@'):
+                line_handled = True
                 if line == '@@end@@':
                     if format_content is None:
                         content[index] = {
@@ -67,6 +70,7 @@ def read(input):
                     section_data = None
                     format_content = None
                 else:
+                    line_handled = True
                     sr = re.search("^@@(?P<type>[0-9a-zA-Z_]+)\:(?P<code>[0-9a-zA-Z_]+)@@", line)
                     if sr != None:
                         type = sr.group(1)
@@ -82,6 +86,10 @@ def read(input):
                         format_index = format_index + 1
                         body = []
 
+            if not line_handled:
+                # this allows for @@asdfasdf@@ to start a line; meaning @@footnote@@ can start a line
+                body.append(line)
+                
         elif line[0] == '@':
             sr = re.search("^@(?P<type>[0-9a-zA-Z_\|]+)@(?P<content>.*)", line)
             if sr != None:
@@ -110,7 +118,7 @@ def read(input):
     if len(body) > 0:
         content[index] = '\n'.join(body).strip("\n")
         obj['_'] = content
-        
+
     return obj
 
 

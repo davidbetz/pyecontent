@@ -33,6 +33,7 @@ CURRENT_PATH = os.path.dirname(os.path.realpath(__file__))
 SAMPLE_PATH = os.path.join(CURRENT_PATH, 'sample')
 ITEM01_PATH = os.path.join(SAMPLE_PATH, 'item01.txt')
 ITEM02_PATH = os.path.join(SAMPLE_PATH, 'item02.md')
+ITEM03_PATH = os.path.join(SAMPLE_PATH, 'item03.md')
 MANIFEST_PATH = os.path.join(SAMPLE_PATH, '.manifest')
 
 ITEM01_EXPECTED = {
@@ -91,6 +92,21 @@ ITEM02_EXPECTED={
     "_basename": "item02"
 }
 
+ITEM03_EXPECTED={
+    '_': {
+        0:
+        'patient mattering graves breathes six endure appeard longermarried infusion lover count digged abridgement dread profoundest:',
+        1: {
+            0: {
+                'insert': 'entry',
+                '_': 'perchance/therein'
+            }
+        },
+        2:
+        'drinks\n\n@@footnote|perchance@@\n\ntill translate weaker perfections hearers comest pitied redeliver insolence'
+    }
+}
+
 class TestApp(unittest.TestCase):
     def disabled_test_walk(self):
         """
@@ -124,6 +140,14 @@ class TestApp(unittest.TestCase):
         result = econtent.read_file(ITEM02_PATH)
 
         self.assertEqual(ITEM02_EXPECTED['_'][0], result['_'][0])
+
+    def test_parse_file3(self):
+        result = econtent.read_file(ITEM03_PATH)
+
+        self.assertEqual(ITEM03_EXPECTED['_'][0], result['_'][0])
+        self.assertEqual(ITEM03_EXPECTED['_'][1][0]["insert"], result['_'][1][0]["insert"])
+        self.assertEqual(ITEM03_EXPECTED['_'][1][0]["_"], result['_'][1][0]["_"])
+        self.assertEqual(ITEM03_EXPECTED['_'][2], result['_'][2])
 
     def test_parse_manifest(self):
         result = econtent.read_file(MANIFEST_PATH)
